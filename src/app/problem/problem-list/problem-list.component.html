@@ -1,0 +1,46 @@
+<form class="row row-cols-lg-auto g-2 align-items-center mb-3">
+  <div class="col-12">
+    <label class="visually-hidden" for="inlineFormInputGroupName">Tên bài tập</label>
+    <div class="input-group">
+      <input type="text" class="form-control" id="inlineFormInputGroupName" placeholder="Tên bài tập" [(ngModel)]="searchQuery.name" name="name">
+    </div>
+  </div>
+  <div class="col-12">
+    <label class="visually-hidden" for="inlineFormSelectDifficulty">Độ khó</label>
+    <select class="form-select" id="inlineFormSelectDifficulty" [(ngModel)]="searchQuery.difficulty" name="difficulty">
+      <option [ngValue]="null">Tất cả</option>
+      <option *ngFor="let d of difficulties" [ngValue]="d.value">{{ d.name }}</option>
+    </select>
+  </div>
+  <div class="col-12">
+    <button type="button" class="btn btn-primary" (click)="search()">Tìm kiếm</button>
+  </div>
+</form>
+
+<table class="table">
+  <thead>
+    <tr class="table-light">
+      <th scope="col">Mã bài tập</th>
+      <th scope="col">Tên bài tập</th>
+      <th scope="col">Mức độ khó</th>
+      <th scope="col">Số lượt nộp</th>
+      <th scope="col">Số lượt làm đúng</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let problem of searchResult?.items">
+      <td><a [routerLink]="['/Problems', problem.id]">{{ problem.id }}</a></td>
+      <td><a [routerLink]="['/Problems', problem.id]">{{ problem.name }}</a></td>
+      <td>{{ problem.difficulty | problemDifficulty }}</td>
+      <td>{{ problem.totalSubmissions }}</td>
+      <td>{{ problem.totalAcceptances }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<app-pagination
+  [totalPages]="searchResult?.totalPages ?? 0"
+  [currentPage]="currentPage"
+  [maxPages]="5"
+  (changePage)="onPageChange($event)">
+</app-pagination>

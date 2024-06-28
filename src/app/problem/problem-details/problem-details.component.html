@@ -1,0 +1,54 @@
+<div class="row" *ngIf="problemDetails">
+  <h1>{{ problemDetails.name }}</h1>
+  <hr />
+  <div class="col-md-9">
+    <article>
+      <app-latex-paragraph [inputString]="problemDetails.statement"></app-latex-paragraph>
+      <h2>Dữ liệu vào</h2>
+      <hr />
+      <app-latex-paragraph [inputString]="problemDetails.inputDescription"></app-latex-paragraph>
+      <h2>Dữ liệu ra</h2>
+      <hr />
+      <app-latex-paragraph [inputString]="problemDetails.outputDescription"></app-latex-paragraph>
+      <h2>Ví dụ</h2>
+      <hr />
+      <app-latex-paragraph [inputString]="problemDetails.example"></app-latex-paragraph>
+    </article>
+  </div>
+  <div class="col-md-3">
+    <div class="d-grid">
+      <button type="button" class="btn btn-primary mb-3">Nộp bài</button>
+    </div>
+    <div class="card mb-3">
+      <div class="card-header">
+        Thông tin bài tập
+      </div>
+      <div class="card-body">
+        <dl class="row mb-0">
+          <dt class="col-sm-6">Mã bài tập</dt>
+          <dd class="col-sm-6">{{ problemDetails.id }}</dd>
+          <dt class="col-sm-6">Độ khó</dt>
+          <dd class="col-sm-6">{{ problemDetails.difficulty | problemDifficulty }}</dd>
+          <dt class="col-sm-6">Giới hạn thời gian</dt>
+          <dd class="col-sm-6">{{ problemDetails.timeLimit }} giây</dd>
+          <dt class="col-sm-6">Giới hạn bộ nhớ</dt>
+          <dd class="col-sm-6">{{ problemDetails.memoryLimit }} KB</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <div class="card-header">
+        Thống kê
+      </div>
+      <div class="card-body">
+        <canvas baseChart
+          [type]="chartConfig.type"
+          [datasets]="chartConfig.data.datasets"
+          [labels]="chartConfig.data.labels"
+          [options]="chartConfig.options"
+          [legend]="true">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>
