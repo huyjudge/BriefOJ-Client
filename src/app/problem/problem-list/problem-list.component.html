@@ -2,7 +2,8 @@
   <div class="col-12">
     <label class="visually-hidden" for="inlineFormInputGroupName">Tên bài tập</label>
     <div class="input-group">
-      <input type="text" class="form-control" id="inlineFormInputGroupName" placeholder="Tên bài tập" [(ngModel)]="searchQuery.name" name="name">
+      <input type="text" class="form-control" id="inlineFormInputGroupName" placeholder="Tên bài tập"
+        [(ngModel)]="searchQuery.name" name="name">
     </div>
   </div>
   <div class="col-12">
@@ -19,7 +20,7 @@
 
 <table class="table">
   <thead>
-    <tr class="table-light">
+    <tr class="table-secondary">
       <th scope="col">Mã bài tập</th>
       <th scope="col">Tên bài tập</th>
       <th scope="col">Mức độ khó</th>
@@ -38,9 +39,6 @@
   </tbody>
 </table>
 
-<app-pagination
-  [totalPages]="searchResult?.totalPages ?? 0"
-  [currentPage]="currentPage"
-  [maxPages]="5"
+<app-pagination [totalPages]="searchResult?.totalPages ?? 0" [currentPage]="currentPage" [maxPages]="5"
   (changePage)="onPageChange($event)">
 </app-pagination>

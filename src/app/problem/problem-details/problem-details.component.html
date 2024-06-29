@@ -1,23 +1,22 @@
 <div class="row" *ngIf="problemDetails">
-  <h1>{{ problemDetails.name }}</h1>
+  <h1 class="h2">{{ problemDetails.name }}</h1>
   <hr />
   <div class="col-md-9">
     <article>
       <app-latex-paragraph [inputString]="problemDetails.statement"></app-latex-paragraph>
-      <h2>Dữ liệu vào</h2>
-      <hr />
+      <h2 class="h4">Dữ liệu vào</h2>
       <app-latex-paragraph [inputString]="problemDetails.inputDescription"></app-latex-paragraph>
-      <h2>Dữ liệu ra</h2>
-      <hr />
+      <h2 class="h4">Dữ liệu ra</h2>
       <app-latex-paragraph [inputString]="problemDetails.outputDescription"></app-latex-paragraph>
-      <h2>Ví dụ</h2>
-      <hr />
+      <h2 class="h4">Ví dụ</h2>
       <app-latex-paragraph [inputString]="problemDetails.example"></app-latex-paragraph>
     </article>
   </div>
   <div class="col-md-3">
     <div class="d-grid">
-      <button type="button" class="btn btn-primary mb-3">Nộp bài</button>
+      <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#submitModal">
+        Nộp bài làm
+      </button>
     </div>
     <div class="card mb-3">
       <div class="card-header">
@@ -38,16 +37,38 @@
     </div>
     <div class="card mb-3">
       <div class="card-header">
-        Thống kê
+        Thống kê bài làm
       </div>
       <div class="card-body">
-        <canvas baseChart
-          [type]="chartConfig.type"
-          [datasets]="chartConfig.data.datasets"
-          [labels]="chartConfig.data.labels"
-          [options]="chartConfig.options"
-          [legend]="true">
+        <canvas baseChart [type]="chartConfig.type" [datasets]="chartConfig.data.datasets"
+          [labels]="chartConfig.data.labels" [options]="chartConfig.options" [legend]="true" [height]="250">
         </canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade in" id="submitModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Nộp bài làm</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #closeModalButton></button>
+      </div>
+      <div id="editor" #editor></div>
+      <div class="modal-footer">
+        <div class="row align-items-center">
+          <div class="col-auto pe-0">
+            <select class="form-select" (change)="onLanguageChange()" [(ngModel)]="createSubmissionDto.languageId"
+              id="selectLanguage">
+              <option *ngFor="let selection of languageSelections" [ngValue]="selection.id">{{ selection.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Trở về</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmit($event)" data-bs-dismiss="modal">Xác
+          nhận</button>
       </div>
     </div>
   </div>

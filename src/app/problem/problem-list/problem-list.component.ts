@@ -17,7 +17,7 @@ import { RouterLink } from '@angular/router';
   imports: [NgForOf, ProblemDifficultyPipe, FormsModule, PaginationComponent, RouterLink]
 })
 export class ProblemListComponent implements OnInit {
-  problemService: ProblemService;
+  private problemService: ProblemService;
   searchQuery: ProblemSearchQuery;
   searchResult: PagedResult<ProblemBriefDto> | null;
   currentPage: number;

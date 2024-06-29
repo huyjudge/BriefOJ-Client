@@ -1,6 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { PagedResult } from '../shared/paged-result';
 import { ProblemBriefDto } from './problem-brief-dto';
 import { ProblemSearchQuery } from './problem-search-query';
@@ -30,7 +30,11 @@ export class ProblemService {
     return this.http.get<PagedResult<ProblemBriefDto>>(`${this.apiUrl}/Problems?${params.toString()}`);
   }
 
-  getById(id: number): Observable<ProblemDetailsDto | undefined> {
-    return this.http.get<ProblemDetailsDto>(`${this.apiUrl}/Problems/${id}`);
+  getById(id: number): Observable<ProblemDetailsDto | null> {
+    return this.http.get<ProblemDetailsDto>(`${this.apiUrl}/Problems/${id}`).pipe(
+      catchError(() => {
+        return of(null);
+      })
+    );
   }
 }

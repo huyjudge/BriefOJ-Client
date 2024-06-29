@@ -32,7 +32,15 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/ace-builds/src-noconflict/ace.js",
+              "node_modules/ace-builds/src-noconflict/theme-eclipse.js",
+              "node_modules/ace-builds/src-noconflict/mode-c_cpp.js",
+              "node_modules/ace-builds/src-noconflict/mode-csharp.js",
+              "node_modules/ace-builds/src-noconflict/mode-sql.js",
+              "node_modules/ace-builds/src-noconflict/mode-pascal.js",
+              "node_modules/ace-builds/src-noconflict/mode-python.js",
+              "node_modules/ace-builds/src-noconflict/mode-java.js"
             ]
           },
           "configurations": {
