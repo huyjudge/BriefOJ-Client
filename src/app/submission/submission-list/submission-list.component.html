@@ -8,7 +8,7 @@
       <th scope="col">Kết quả</th>
       <th scope="col">Bài tập</th>
       <th scope="col">Ngôn ngữ</th>
-      <th scope="col">Người nộp</th>
+      <!-- <th scope="col">Người nộp</th> -->
     </tr>
   </thead>
   <tbody>
@@ -20,7 +20,7 @@
       <td><span [className]="submission.status | submissionStatusClass">{{ submission.status | submissionStatus }}</span></td>
       <td><a [routerLink]="['/Problems', submission.problemId]">{{ submission.problemName }}</a></td>
       <td>{{ submission.languageName }}</td>
-      <td>{{ submission.creatorName }}</td>
+      <!-- <td>{{ submission.creatorName }}</td> -->
     </tr>
   </tbody>
 </table>
