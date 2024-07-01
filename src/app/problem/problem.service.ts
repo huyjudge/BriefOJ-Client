@@ -10,7 +10,7 @@ import { ProblemDetailsDto } from './problem-details-dto';
   providedIn: 'root'
 })
 export class ProblemService {
-  apiUrl = 'https://localhost:7177/api';
+  apiUrl = 'https://briefoj.somee.com/api';
 
   constructor(private http: HttpClient) { }
 

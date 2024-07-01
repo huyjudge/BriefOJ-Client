@@ -11,7 +11,7 @@ import { SubmissionDetailsDto } from './submission-details-dto';
   providedIn: 'root'
 })
 export class SubmissionService {
-  apiUrl = 'https://localhost:7177/api';
+  apiUrl = 'https://briefoj.somee.com/api';
 
   constructor(private http: HttpClient) { }
 
