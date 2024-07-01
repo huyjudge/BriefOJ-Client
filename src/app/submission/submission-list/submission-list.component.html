@@ -1,6 +1,7 @@
 <table class="table table-hover">
   <thead>
-    <tr class="table-secondary">
+    <tr>
+      <th scope="col">Hành động</th>
       <th scope="col">Mã bài nộp</th>
       <th scope="col">Ngày nộp</th>
       <th scope="col">Thời gian chạy</th>
@@ -13,7 +14,8 @@
   </thead>
   <tbody>
     <tr *ngFor="let submission of searchResult?.items">
-      <td>{{ submission.id }}</td>
+      <td><button class="btn btn-sm btn-primary" [routerLink]="['/Submissions', submission.id]">Xem chi tiết</button></td>
+      <td><a [routerLink]="['/Submissions', submission.id]">{{ submission.id }}</a></td>
       <td>{{ submission.createdAt }}</td>
       <td>{{ submission.time }}</td>
       <td>{{ submission.memory }}</td>

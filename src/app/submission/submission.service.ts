@@ -5,6 +5,7 @@ import { Observable, catchError, of } from 'rxjs';
 import { SubmissionSearchQuery } from './submission-search-query';
 import { SubmissionBriefDto } from './submission-brief-dto';
 import { PagedResult } from '../shared/paged-result';
+import { SubmissionDetailsDto } from './submission-details-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,13 @@ export class SubmissionService {
     }
 
     return this.http.get<PagedResult<SubmissionBriefDto>>(`${this.apiUrl}/Submissions?${params.toString()}`);
+  }
+
+  getById(id: number): Observable<SubmissionDetailsDto | undefined> {
+    return this.http.get<SubmissionDetailsDto>(`${this.apiUrl}/Submissions/${id}`).pipe(
+      catchError(() => {
+        return of(undefined);
+      })
+    );
   }
 }

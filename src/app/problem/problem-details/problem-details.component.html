@@ -66,8 +66,8 @@
             </select>
           </div>
         </div>
-        <button type="button" class="btn btn-primary" (click)="onSubmit($event)" data-bs-dismiss="modal">Xác nhận</button>
-        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng lại</button>
+        <button type="button" class="btn btn-primary" [disabled]="!isValidSourceCode()" (click)="isValidSourceCode() && onSubmit($event)" data-bs-dismiss="modal">Xác nhận</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng lại</button>
       </div>
     </div>
   </div>

@@ -1,0 +1,34 @@
+<div *ngIf="submissionDetails">
+  <div class="card mb-3">
+    <div class="card-header">
+      Thông tin bài nộp
+    </div>
+    <div class="card-body">
+      <dl class="row mb-0">
+        <dt class="col-sm-6">Mã bài nộp</dt>
+        <dd class="col-sm-6">{{ submissionDetails.id }}</dd>
+        <dt class="col-sm-6">Thời gian chạy</dt>
+        <dd class="col-sm-6">{{ submissionDetails.time }}</dd>
+        <dt class="col-sm-6">Bộ nhớ đã dùng</dt>
+        <dd class="col-sm-6">{{ submissionDetails.memory }}</dd>
+        <dt class="col-sm-6">Kết quả</dt>
+        <dd class="col-sm-6">
+          <span [className]="submissionDetails.status | submissionStatusClass">
+            {{ submissionDetails.status | submissionStatus }}
+          </span>
+        </dd>
+        <dt class="col-sm-6">Ngày nộp</dt>
+        <dd class="col-sm-6">{{ submissionDetails.createdAt }}</dd>
+        <dt class="col-sm-6">Tên bài tập</dt>
+        <dd class="col-sm-6">
+          <a [routerLink]="['/Problems', submissionDetails.problemId]">
+            {{ submissionDetails.problemName }}
+          </a>
+        </dd>
+        <dt class="col-sm-6">Ngôn ngữ lập trình</dt>
+        <dd class="col-sm-6">{{ submissionDetails.languageName }}</dd>
+      </dl>
+    </div>
+  </div>
+</div>
+<div id="editor" class="mb-3 border" #editor></div>

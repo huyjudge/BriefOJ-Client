@@ -14,13 +14,14 @@
     </select>
   </div>
   <div class="col-12">
-    <button type="button" class="btn btn-primary" (click)="search()">Tìm kiếm</button>
+    <button type="button" class="btn btn-secondary" (click)="search()">Tìm kiếm</button>
   </div>
 </form>
 
 <table class="table">
   <thead>
-    <tr class="table-secondary">
+    <tr>
+      <th scope="col">Hành động</th>
       <th scope="col">Mã bài tập</th>
       <th scope="col">Tên bài tập</th>
       <th scope="col">Mức độ khó</th>
@@ -30,6 +31,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let problem of searchResult?.items">
+      <td><button class="btn btn-sm btn-primary" [routerLink]="['/Problems', problem.id]">Xem chi tiết</button></td>
       <td><a [routerLink]="['/Problems', problem.id]">{{ problem.id }}</a></td>
       <td><a [routerLink]="['/Problems', problem.id]">{{ problem.name }}</a></td>
       <td>{{ problem.difficulty | problemDifficulty }}</td>

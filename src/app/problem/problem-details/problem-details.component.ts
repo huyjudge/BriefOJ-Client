@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProblemDetailsDto } from '../problem-details-dto';
 import { ProblemService } from '../problem.service';
@@ -18,7 +18,7 @@ import { SubmissionService } from '../../submission/submission.service';
     styleUrl: './problem-details.component.css',
     imports: [ProblemDifficultyPipe, NgIf, BaseChartDirective, LatexParagraphComponent, NgForOf, FormsModule]
 })
-export class ProblemDetailsComponent implements OnInit, AfterViewInit {
+export class ProblemDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   private route: ActivatedRoute;
   private router: Router;
   private problemService: ProblemService;
@@ -65,6 +65,12 @@ export class ProblemDetailsComponent implements OnInit, AfterViewInit {
     this.aceEditor.session.setMode('ace/mode/c_cpp');
   }
 
+  ngOnDestroy(): void {
+    if (this.aceEditor) {
+      this.aceEditor.destroy();
+    }
+  }
+
   createChart() {
     this.chartConfig = {
       type: 'doughnut',
@@ -103,5 +109,9 @@ export class ProblemDetailsComponent implements OnInit, AfterViewInit {
         this.router.navigate(['/Submissions']);
       }
     });
+  }
+
+  isValidSourceCode() {
+    return this.aceEditor && this.aceEditor.getValue().length > 0;
   }
 }
