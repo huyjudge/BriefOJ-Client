@@ -3,7 +3,7 @@ import { ProblemSearchQuery } from '../problem-search-query';
 import { ProblemService } from '../problem.service';
 import { PagedResult } from '../../shared/paged-result';
 import { ProblemBriefDto } from '../problem-brief-dto';
-import { NgForOf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { ProblemDifficultyPipe } from "../problem-difficulty.pipe";
 import { FormsModule } from '@angular/forms';
 import { PaginationComponent } from "../../shared/pagination/pagination.component";
@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   templateUrl: './problem-list.component.html',
   styleUrl: './problem-list.component.css',
-  imports: [NgForOf, ProblemDifficultyPipe, FormsModule, PaginationComponent, RouterLink]
+  imports: [NgForOf, ProblemDifficultyPipe, FormsModule, PaginationComponent, RouterLink, NgIf]
 })
 export class ProblemListComponent implements OnInit {
   private problemService: ProblemService;
@@ -26,6 +26,7 @@ export class ProblemListComponent implements OnInit {
     { name: 'Thường', value: 2 },
     { name: 'Khó', value: 3 }
   ];
+  searchDone: boolean = false;
 
   constructor() {
     this.problemService = inject(ProblemService);
@@ -44,9 +45,11 @@ export class ProblemListComponent implements OnInit {
   }
 
   search() {
+    this.searchDone = false;
     this.problemService.search(this.searchQuery).subscribe(response => {
       this.searchResult = response;
       this.currentPage = 1;
+      this.searchDone = true;
     });
   }
 

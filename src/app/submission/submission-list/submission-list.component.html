@@ -14,18 +14,43 @@
   </thead>
   <tbody>
     <tr *ngFor="let submission of searchResult?.items">
-      <td><button class="btn btn-sm btn-primary" [routerLink]="['/Submissions', submission.id]">Xem chi tiết</button></td>
+      <td>
+        <button *ngIf="submission.status != 1" class="btn btn-sm btn-primary" [routerLink]="['/Submissions', submission.id]">Xem chi tiết</button>
+      </td>
       <td><a [routerLink]="['/Submissions', submission.id]">{{ submission.id }}</a></td>
       <td>{{ submission.createdAt }}</td>
-      <td>{{ submission.time }}</td>
-      <td>{{ submission.memory }}</td>
-      <td><span [className]="submission.status | submissionStatusClass">{{ submission.status | submissionStatus }}</span></td>
+      <td>
+        <span *ngIf="submission.status != 1">{{ submission.time }}</span>
+        <div *ngIf="submission.status == 1" class="spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Judging...</span>
+        </div>
+      </td>
+      <td>
+        <span *ngIf="submission.status != 1">{{ submission.memory }}</span>
+        <div *ngIf="submission.status == 1" class="spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Judging...</span>
+        </div>
+      </td>
+      <td>
+        <span *ngIf="submission.status != 1" [className]="submission.status | submissionStatusClass">
+          {{ submission.status | submissionStatus }}
+        </span>
+        <div *ngIf="submission.status == 1" class="spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Judging...</span>
+        </div>
+      </td>
       <td><a [routerLink]="['/Problems', submission.problemId]">{{ submission.problemName }}</a></td>
       <td>{{ submission.languageName }}</td>
       <!-- <td>{{ submission.creatorName }}</td> -->
     </tr>
   </tbody>
 </table>
+
+<div *ngIf="!searchDone" class="text-center m-3">
+  <div class="spinner-border mx-auto" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
 
 <app-pagination
   [totalPages]="searchResult?.totalPages ?? 0"
