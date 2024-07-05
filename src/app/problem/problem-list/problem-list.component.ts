@@ -45,6 +45,7 @@ export class ProblemListComponent implements OnInit {
   }
 
   search() {
+    this.searchResult = null;
     this.searchDone = false;
     this.problemService.search(this.searchQuery).subscribe(response => {
       this.searchResult = response;

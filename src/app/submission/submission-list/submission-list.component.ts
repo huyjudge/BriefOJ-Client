@@ -53,6 +53,7 @@ export class SubmissionListComponent implements OnInit, OnDestroy {
   }
 
   search() {
+    this.searchResult = null;
     this.searchDone = false;
     this.submissionService.search(this.searchQuery).subscribe(response => {
       this.searchResult = response;
